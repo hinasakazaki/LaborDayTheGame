@@ -8,13 +8,14 @@ public class SceneControlScript : MonoBehaviour {
 	public GameObject DIALOG;
 	public GameObject MainPanel;
 	public GameObject Clipboard;
+	public GameObject worker;
+	public GameObject boss;
 
 	public int scene; //1 = entry, 2 = factory
 
 	// Use this for initialization
 	void Start () {
 		scene = 2;
-	
 	}
 
 	// Update is called once per frame
@@ -40,6 +41,15 @@ public class SceneControlScript : MonoBehaviour {
 						child.gameObject.SetActive (false);
 					}
 				}
+			}
+			int RandomInt = Random.Range(0, 1500);
+			if (RandomInt < 10){
+				worker.GetComponent<WorkerScript>().SetSlacking(Random.Range (0, 7));
+			} else if (RandomInt < 20){
+				worker.GetComponent<WorkerScript>().SetStealing(Random.Range (0,7));
+			}
+			if (RandomInt < 950 && RandomInt > 957){
+				boss.GetComponent<BossScript>().SetWatchingPorn();
 			}
 		}
 	}

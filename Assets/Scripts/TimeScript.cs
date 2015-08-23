@@ -30,6 +30,9 @@ public class TimeScript : MonoBehaviour {
 			clockformat += am;
 			clockText.text = clockformat;
 		}
+		if (timer == 0) {
+			//end game
+		}
 	
 	}
 }

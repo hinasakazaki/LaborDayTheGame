@@ -16,9 +16,23 @@ public class CollisionScript : MonoBehaviour {
 		if (coll.name.Contains ("metaldetector")) {
 			SceneController.GetComponent<SceneControlScript> ().EnterBuilding ();
 		} else if (coll.name == "Lydia") {
-			DIALOG.GetComponent<DialogScript>().setLydia();
+			DIALOG.GetComponent<DialogScript> ().setLydia ();
 		} else if (coll.name == "Brian") {
-			DIALOG.GetComponent<DialogScript>().setBrian();
+			DIALOG.GetComponent<DialogScript> ().setBrian ();
+		} else if (coll.name == "boss") {
+			if (coll.gameObject.GetComponent<BossScript>().isWatchingPorn()){
+				DIALOG.GetComponent<DialogScript>().setPornBoss();
+			} else {
+				DIALOG.GetComponent<DialogScript> ().setBoss ();
+			}
+		} else if (coll.name.Contains ("Worker")) {
+			if (coll.gameObject.GetComponent<WorkerScript>().isSlacking()){
+				DIALOG.GetComponent<DialogScript> ().setSlackingWorker ();
+			}else if (coll.gameObject.GetComponent<WorkerScript>().isStealing()){
+				DIALOG.GetComponent<DialogScript> ().setStealingWorker ();
+			}else {
+				DIALOG.GetComponent<DialogScript> ().setNormalWorker ();
+			}
 		}
 	}
 }

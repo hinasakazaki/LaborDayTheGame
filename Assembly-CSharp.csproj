@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{1C023029-B665-F585-E26B-D2904C17B356}</ProjectGuid>
+	<ProjectGuid>{E8071D0F-CC02-EB76-58E1-E1C8D01BA7F8}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,6 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\QuotaScript.cs" />
+     <Compile Include="Assets\Scripts\BossScript.cs" />
      <Compile Include="Assets\Scripts\CollisionScript.cs" />
      <Compile Include="Assets\Scripts\DialogScript.cs" />
      <Compile Include="Assets\Scripts\MoveScript.cs" />
