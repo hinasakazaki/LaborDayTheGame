@@ -2,11 +2,13 @@
 using System.Collections;
 
 public class WorkerScript : MonoBehaviour {
+	public static bool workersLeft= true;
 	public Sprite[] spriteArray;
 	public int index = 0;
 	public int workerId;
 	public bool clone;
-	
+
+	public static bool[] dead = new bool[7]{false, false, false, false, false, false, false};
 	public static bool[] slacking = new bool[7]{false, false, false, false, false, false, false};
 	public static bool[] stealing = new bool[7]{false, false, false, false, false, false, false};
 	public static int[] workerIdArray = new int[7]{0, 1, 2, 3, 4, 5, 6};
@@ -15,28 +17,68 @@ public class WorkerScript : MonoBehaviour {
 	void Start () {
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [workerId];
 	}
-	
+
+	public void Refresh(){
+		workersLeft= true;
+		bool[] dead = new bool[7]{false, false, false, false, false, false, false};
+		bool[] slacking = new bool[7]{false, false, false, false, false, false, false};
+		bool[] stealing = new bool[7]{false, false, false, false, false, false, false};
+		int[] workerIdArray = new int[7]{0, 1, 2, 3, 4, 5, 6};
+		this.gameObject.SetActive (true);
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;
+		this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [workerId];
+
+	}
 	// Update is called once per frame
 	void Update () {
-		if (!clone && slacking[workerId]) {
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = null;
-		} else if (clone && slacking[workerId]) {
-			transform.position += Vector3.up*Time.deltaTime*0.1f;		
-			foreach (Transform child in gameObject.transform) {
+		if (dead [workerId]) {
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+		} else {
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [workerIdArray[workerId]];
+		}
+
+		foreach (Transform child in gameObject.transform) {
+			if (!slacking[workerId] && !stealing[workerId]){
+				if (child.name == "zzz") {
+					child.gameObject.SetActive (false);
+				}
+				if (child.name == "$") {
+					child.gameObject.SetActive (false);
+				}
+			}
+
+			if (slacking[workerId]){
+				if (child.name == "zzz") {
+					child.gameObject.SetActive (true);
+				}
+				if (child.name == "!") {
+					child.gameObject.SetActive (false);
+				}if (child.name == "$" && clone) {
+					child.gameObject.SetActive (false);
+				}
+			} else if (stealing[workerId]){
+				if (child.name == "$" && clone) {
+					child.gameObject.SetActive (true);
+				}
+				if (child.name == "!"){
+					child.gameObject.SetActive(false);
+				}
 				if (child.name == "zzz"){
-					child.gameObject.SetActive(true);
+					child.gameObject.SetActive(false);
 				}
 			}
 		}
-		else if (!clone && stealing[workerId]) {
-			//something that indicates stealing
-		}
 	}
 	public void SetSlacking(int i){
-		slacking [i] = true;
+		if (!dead [i] && !stealing[i]) {
+			slacking [i] = true;
+		}
 	}
 	public void SetStealing(int i){
-		stealing [i] = true;
+		if (!dead [i] && !slacking[i]) {
+			stealing [i] = true;
+		}
 	}
 	public bool isStealing(){
 		return stealing [workerId];
@@ -45,16 +87,49 @@ public class WorkerScript : MonoBehaviour {
 		return slacking [workerId];
 	}
 	public void SwapSprite(){
-		if (index == spriteArray.Length) {
-			index = 0;
-		} else {
-			index += 1;
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = true;
+		int RandomNextSprite = Random.Range (0, spriteArray.Length);
+		workerIdArray [workerId] = RandomNextSprite;
+		this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [RandomNextSprite];
+		dead [workerId] = false;
+
+	}
+	public bool isDead(){
+		return dead [workerId];
+	}
+
+	public void death(){
+		dead [workerId] = true;
+		stealing [workerId] = false;
+		slacking [workerId] = false;
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+		foreach (Transform child in gameObject.transform) {
+			if (child.name == "bloodpool") {
+				child.gameObject.SetActive (true);
+			}
+			if (child.name == "!"){
+				child.gameObject.SetActive(false);
+			}if (child.name == "zzz"){
+				child.gameObject.SetActive(false);
+			}if (child.name == "$"){
+				child.gameObject.SetActive(false);
+			}
+
 		}
-		if (!clone) {
-			workerIdArray[workerId] = index;
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [index];
-		} else {
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = spriteArray [workerIdArray[workerId]];
+		if (workersLeft) {
+			Invoke ("SwapSprite", 2f);
+		}
+	}
+
+	public void feed(){
+		slacking[workerId] = false;
+		foreach (Transform child in gameObject.transform) {
+			if (child.name == "!"){
+				child.gameObject.SetActive(true);
+			}
+			else if (child.name == "zzz"){
+				child.gameObject.SetActive(false);
+			}
 		}
 	}
 }

@@ -46,12 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\QuotaScript.cs" />
      <Compile Include="Assets\Scripts\BossScript.cs" />
      <Compile Include="Assets\Scripts\CollisionScript.cs" />
      <Compile Include="Assets\Scripts\DialogScript.cs" />
      <Compile Include="Assets\Scripts\MoveScript.cs" />
+     <Compile Include="Assets\Scripts\QuotaScript.cs" />
      <Compile Include="Assets\Scripts\SceneControlScript.cs" />
+     <Compile Include="Assets\Scripts\ShroomScript.cs" />
+     <Compile Include="Assets\Scripts\SoundScript.cs" />
      <Compile Include="Assets\Scripts\TimeScript.cs" />
      <Compile Include="Assets\Scripts\WorkerScript.cs" />
  <Reference Include="UnityEngine.UI">

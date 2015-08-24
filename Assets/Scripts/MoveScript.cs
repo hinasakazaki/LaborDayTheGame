@@ -17,11 +17,6 @@ public class MoveScript : MonoBehaviour {
 		x2 = -7f;
 		y1 = -.8f;
 		y2 = -3f;
-
-		x1 = 2f;
-		x2 = -6.5f;
-		y1 = 1f;
-		y2 = -2.5f;
 	}
 	
 	// Update is called once per frame
@@ -35,14 +30,14 @@ public class MoveScript : MonoBehaviour {
 			transform.position += Vector3.right * speed * Time.deltaTime;
 			animator.SetInteger("state", 1);
 		}
-		if ((Input.GetKey (KeyCode.UpArrow)|Input.GetKey(KeyCode.W))&& transform.position.y < y1) {
+		if ((Input.GetKey(KeyCode.UpArrow)|Input.GetKey(KeyCode.W))&& transform.position.y < y1) {
 			transform.position += Vector3.up * speed * Time.deltaTime;	
 			animator.SetInteger("state", 2);
 		}
 		if ((Input.GetKey (KeyCode.DownArrow) | Input.GetKey (KeyCode.S)) && transform.position.y > y2) {
 			transform.position += Vector3.down * speed * Time.deltaTime;
 			animator.SetInteger ("state", 3);
-		} 	
+		} 
 	}
 	public void EnterFactory(){
 		x1 = 2f;

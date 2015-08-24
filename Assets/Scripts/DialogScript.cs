@@ -5,7 +5,7 @@ public class DialogScript : MonoBehaviour {
 	Text person;
 	Text content;
 	string[] normalPhrases = new string[]{"Hey Manager!", "Busy day!", "Let's be productive!"};
-	string[] stealingPhrases = new string[]{"I'm... not stealing or anything!", "I need this for the kids!", "Is this illegal?"};
+	string[] stealingPhrases = new string[]{"I couldn't help it!", "I need this for the kids!", "Is this illegal?"};
 	string[] slackingPhrases = new string[]{"Ugh so sleepy...", "Factory job is boring.", "Feeling unmotivated..."};
 	string[] pornPhrases = new string[]{"AH! You caught me!", "I know it's inappropriate!", "Porn is more interesting!"};
 
@@ -28,11 +28,11 @@ public class DialogScript : MonoBehaviour {
 
 	public void setLydia(){
 		person.text = "Lydia (Security):";
-		content.text = "Good morning Miz!";
+		content.text = "Good morning!";
 	}
 	public void setBrian(){
 		person.text = "Brian (Security):";
-		content.text = "Have a good day!";
+		content.text = "All's secure!!";
 	}
 	public void setEnterFactory(){
 		person.text = "Me:";
@@ -57,5 +57,17 @@ public class DialogScript : MonoBehaviour {
 	public void setPornBoss(){
 		person.text = "Boss:";
 		content.text = pornPhrases [Random.Range (0, normalPhrases.Length)];
+	}
+	public void mushroomQuote(){
+		person.text = "MUSHROOM:";
+		content.text = "I will motivate this person!";
+	}
+	public void deathWorker(){
+		person.text = "Worker:";
+		content.text = "Good bye world!";
+	}
+	public void deathBoss(){
+		person.text = "Boss:";
+		content.text = "GAAAHH!";
 	}
 }

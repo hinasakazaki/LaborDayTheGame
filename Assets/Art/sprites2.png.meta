@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f8d05084d7d841a46acf2e136b925e3a
-timeCreated: 1440286910
+timeCreated: 1440348156
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -32,6 +32,7 @@ TextureImporter:
     21300050: sprites2_25
     21300052: sprites2_26
     21300054: sprites2_27
+    21300056: sprites2_28
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -354,6 +355,16 @@ TextureImporter:
         y: 80
         width: 72
         height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: sprites2_28
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 17
+        width: 27
+        height: 43
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
